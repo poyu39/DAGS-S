@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Target 1</TargetName>
+      <TargetName>DAGS-S</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
@@ -556,9 +556,9 @@
               <FilePath>..\Modules\src\sys.c</FilePath>
             </File>
             <File>
-              <FileName>btn.c</FileName>
+              <FileName>controller.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Modules\src\btn.c</FilePath>
+              <FilePath>..\Modules\src\controller.c</FilePath>
             </File>
             <File>
               <FileName>delay.c</FileName>
@@ -579,6 +579,11 @@
               <FileName>im948.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Modules\src\im948.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Modules\src\timer.c</FilePath>
             </File>
           </Files>
         </Group>

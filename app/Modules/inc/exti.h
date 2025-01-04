@@ -1,9 +1,11 @@
 #ifndef __EXTI_H__
 #define __EXIT_H__
+
+#include <stdio.h>
 #include "stm32f10x.h"
-#include "stdio.h"
-
 #include "sys.h"
+#include "controller.h"
 
-void EXTIX_Init(void);
+void exti_init(void);
+
 #endif

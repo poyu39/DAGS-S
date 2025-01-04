@@ -1,23 +1,23 @@
 #include "exti.h"
 
-void EXTIX_Init(void) {
-    /******** ´≈ßi EXTI°BNVIC µ≤∫c≈È ********/
+void exti_init(void) {
+    /******** ÂÆ£Âëä EXTI„ÄÅNVIC ÁµêÊßãÈ´î ********/
     EXTI_InitTypeDef EXTI_InitStructure;
     NVIC_InitTypeDef NVIC_InitStructure;
-
+    
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-
-    /******** ≥]©w PA0 ¨∞ §§¬_®”∑Ω ********/
+    
+    /******** Ë®≠ÂÆö PA0 ÁÇ∫ ‰∏≠Êñ∑‰æÜÊ∫ê ********/
     GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource0);
-
-    /******** EXTI0 ∞Ú•ª∞—º∆≥]©w ********/
+    
+    /******** EXTI0 Âü∫Êú¨ÂèÉÊï∏Ë®≠ÂÆö ********/
     EXTI_InitStructure.EXTI_Line = EXTI_Line0;
     EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
     EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
     EXTI_InitStructure.EXTI_LineCmd = ENABLE;
     EXTI_Init(&EXTI_InitStructure);
-
-    /* ±“•Œ	EXTI0 §§¬_ */
+    
+    /* ÂïüÁî®	EXTI0 ‰∏≠Êñ∑ */
     NVIC_InitStructure.NVIC_IRQChannel = EXTI0_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
@@ -25,8 +25,8 @@ void EXTIX_Init(void) {
     NVIC_Init(&NVIC_InitStructure);
 }
 
-// void EXTI0_IRQHandler(void) {
-//     pwm_count = 0;                              // Count¬kπs
-//     TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);  // ±“•ŒTimer4
-//     EXTI_ClearITPendingBit(EXTI_Line0);
-// }
+void EXTI0_IRQHandler(void) {
+    pwm_count = 0;
+    TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);
+    EXTI_ClearITPendingBit(EXTI_Line0);
+}
