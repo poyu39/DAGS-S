@@ -1,8 +1,10 @@
 #ifndef __DRV_UART_H__
 #define __DRV_UART_H__
 
-#define DBP_UART_PORT           2  // debug uart
 #define IM948_UART_PORT         0  // im948 uart
+#define GPS_UART_PORT           1  // gps uart
+#define DBP_UART_PORT           2  // debug uart
+
 
 #include <stdio.h>
 #include <stdint.h>

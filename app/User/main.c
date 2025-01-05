@@ -6,10 +6,9 @@
 #include "drv_uart.h"
 #include "im948.h"
 #include "timer.h"
+#include "gps.h"
 
-
-char u3_msg[150];
-uint32_t sdcard_line_ctr = 0;
+uint32_t No = 0;
 
 volatile int pwm_count, pre_pwm_state;
 volatile int rec_mode=5, rec_signal=0, pre_rec=0, key_up=1, dbc=0;
@@ -91,7 +90,8 @@ int main() {
     
     delay_init();
     
-    uart_open(DBP_UART_PORT, 115200, 8, 1, 'n');
+    uart_open(DBP_UART_PORT, 38400, 8, 1, 'n');
+    uart_open(GPS_UART_PORT, 38400, 8, 1, 'n');
     uart_open(IM948_UART_PORT, 115200, 8, 1, 'n');
     
     // safe delay
@@ -114,18 +114,16 @@ int main() {
         check_rec_status();
         
         im948_parse_fifo_buf();
+        gps_parse_fifo_buf();
         
         if (im948_have_new_data) {
             im948_have_new_data = 0;
-            Sdp("%.1f,%.1f,%.1f\r\n", im948_angle_x, im948_angle_y, im948_angle_z);
             ctrl_trigger_relay();
-            // if (No == 0)
-                // Usart3_Send(" No.,GpsDate,GpsTime,Latitude,Longitude,Altitude,Pitch,Roll,Yaw\r\n");
-            // sprintf(u3_msg, "%d,%s,%s,%.12f,%.12f,%.2f,%.1f,%.1f,%.1f\r\n", No, GPS_Date, GPS_Utc, GPS_Latitude, GPS_Longitude, GPS_Msl, g_16Pitch / 10.0, g_16Roll / 10.0, g_16Yaw / 10.0);  // 更新所有參數
-            // Usart3_Send(u3_msg);
-            // ctrl_trigger_relay();
-            sdcard_line_ctr = (sdcard_line_ctr + 1) % UINT32_MAX;
+            
+            if (No == 0) Sdp("No., GpsTime, Latitude, Longitude, Altitude, Pitch, Roll, Yaw\r\n");
+            
+            Sdp("%d, %s, %.12f, %.12f, %.2f, %.1f, %.1f, %.1f\r\n", No, gps_utc, gps_latitude, gps_longitude, gps_msl, im948_angle_x, im948_angle_y, im948_angle_z);
+            No = (No + 1) % UINT32_MAX;
         }
-        
     }
 }

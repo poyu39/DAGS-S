@@ -585,6 +585,11 @@
               <FileType>1</FileType>
               <FilePath>..\Modules\src\timer.c</FilePath>
             </File>
+            <File>
+              <FileName>gps.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Modules\src\gps.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
