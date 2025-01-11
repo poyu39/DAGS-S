@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CMSIS;..\Libraries\inc;..\User;..\Modules\inc</IncludePath>
+              <IncludePath>..\CSMIS;..\Libraries\inc;..\User;..\Modules\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
