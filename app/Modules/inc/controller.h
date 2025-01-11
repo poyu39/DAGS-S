@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "stm32f10x.h"
 #include "sys.h"
+#include "delay.h"
 
 #define REC_PER_1S  9999
 #define REC_PER_2S  19999
@@ -30,5 +31,7 @@ void ctrl_time_jumper_init(void);
 void ctrl_relay_init(void);
 
 void ctrl_trigger_relay(void);
+
+void ctrl_exti_pin_init(void);
 
 #endif

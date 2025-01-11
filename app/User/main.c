@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include "stm32f10x.h"
 
-#include "delay.h"
 #include "controller.h"
 #include "drv_uart.h"
 #include "im948.h"
 #include "timer.h"
+#include "exti.h"
 #include "gps.h"
 
 uint32_t No = 0;
@@ -13,7 +13,6 @@ uint32_t No = 0;
 volatile int pwm_count, pre_pwm_state;
 volatile int rec_mode=5, rec_signal=0, pre_rec=0, key_up=1, dbc=0;
 volatile int pre_mode;
-
 
 void TIM3_IRQHandler(void) {
     if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET) {
@@ -81,7 +80,6 @@ void check_rec_status(void) {
 }
 
 
-
 int main() {
     ctrl_rec_init();
     ctrl_led_init();
@@ -108,6 +106,9 @@ int main() {
     
     timer_init(3, REC_PER_5S, 7199);
     timer_init(4, 1, 71);
+    
+    ctrl_exti_pin_init();
+    exti_init();
     
     while (1) {
         check_rec_mode();

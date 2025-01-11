@@ -26,6 +26,12 @@ void timer_init(uint8_t num, uint16_t arr, uint16_t psc) {
     }
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;                 //IRQ channel enable
     NVIC_Init(&NVIC_InitStructure);                            		// 初始化 NVIC 寄存器
+    
+    if (num == 3) {
+        TIM_Cmd(TIM3, ENABLE);
+    } else if (num == 4) {
+        TIM_Cmd(TIM4, ENABLE);
+    }
 }
 
 // 設置錄製頻率
